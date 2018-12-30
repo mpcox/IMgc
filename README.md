@@ -1,6 +1,6 @@
 # IMgc
 
-*IMgc* reads in an aligned FASTA file, and finds and returns the largest non-recombining block of DNA sequence. This is necessary for downstream analyses that require datasets containing no evidence of recombination. *IMgc* maximizes the amount of information (as defined by the user) in the final dataset. Specifically, the user can favour retention of segregating sites versus individuals. The default is equal weighting of individuals and segregating sites.
+*IMgc* reads in an aligned FASTA file, and finds and returns the largest non-recombining block of DNA sequence. This is necessary for downstream analyses that require datasets containing no evidence of recombination. *IMgc* maximizes the amount of information (as defined by the user) in the final dataset. Specifically, the user can favor retention of segregating sites versus individuals. The default is equal weighting of individuals and segregating sites.
 
 *IMgc* was developed and reported in:
 
@@ -14,18 +14,26 @@ When running *IMgc*, the software first identifies segregating sites (we current
 GATCN–
 ```
 
-where *N* signifies missing data and – indicates an indel.
+where *N* signifies missing data and – indicates a known indel.
 
 Complex multi-base indels are sometimes observed; for instance:
 
 ```
 ATT --T --- ATT --T
+ATT --T ACA ATT --T
+ATT --T ACA ATT --T
+ATT --T TGT ATT --T
+ATT --T TGT ATT --T
 ```
 
-*IMgc* treats adjacent indels as a single unit.  For infinite sites violations, *IMgc* currently changes all but the two highest frequency character states at a site violating the infinite sites model to *N*. For instance, if the three adjacent indels are infinite site violations, the example above becomes:
+*IMgc* treats adjacent indels as a single unit.  For infinite sites violations, *IMgc* currently changes all but the two highest frequency character states at a site violating the infinite sites model to *N*. For instance, because the three adjacent positions containing indels are infinite site violations, the example above becomes:
 
 ```
 ATT -T NNN ATT -T
+ATT -T ACA ATT -T
+ATT -T ACA ATT -T
+ATT -T TGT ATT -T
+ATT -T TGT ATT -T
 ```
 
 
