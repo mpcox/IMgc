@@ -26,7 +26,7 @@ ATT --T TGT ATT --T
 ATT --T TGT ATT --T
 ```
 
-*IMgc* treats adjacent indels as a single unit.  For infinite sites violations, *IMgc* currently changes all but the two highest frequency character states at a site violating the infinite sites model to *N*. For instance, because the three adjacent positions containing indels are infinite site violations, the example above becomes:
+*IMgc* treats adjacent indels as a single unit.  For infinite sites violations, *IMgc* changes all but the two highest frequency character states at a site violating the infinite sites model to *N*. For instance, because the three adjacent positions containing indels are infinite site violations, the example above becomes:
 
 ```
 ATT -T NNN ATT -T
@@ -39,7 +39,7 @@ ATT -T TGT ATT -T
 
 INSTALLATION
 
-*IMgc* requires a standard working Perl installation and has been confirmed to work with Perl versions up to 5.18.2.
+*IMgc* requires a standard working Perl installation and has been confirmed to run with Perl versions up to 5.18.2.
 
 
 USAGE
@@ -67,20 +67,22 @@ There are, however, a number of user options that can be set:
 -f    prints output in FASTA format, not IM format
 ```
 
+The *–o* option is particularly useful if the file contains outgroups.  For instance, a file of human sequences may contain a chimpanzee outgroup.  Using the *–o* option would cause *IMgc* to analyze the human sequences, excluding the chimpanzee sequence, but later append the chimpazee sequence back to the output file to allow downstream analyses.
+
 
 EXAMPLE
 
 Example [input and output files](examples) are included with this package.
 
-[3.0cMperMb_example.fasta](examples/3.0cMperMb_example.fasta) represents a 10 kb aligned DNA dataset of 96 chromosomal copies simulated under a standard *n*-coalescent with a recombination rate of 3.0 cM/Mb. Non-segregating sites have been changed to *N* for clarification, but this is not a requirement of *IMgc*.
+[3.0cMperMb_example.fasta](examples/3.0cMperMb_example.fasta) represents an aligned DNA dataset of 96 chromosomal copies simulated under the standard *n*-coalescent with a recombination rate of 3.0 cM/Mb. Non-segregating sites have been changed to *N* for clarification, but this is not a requirement of *IMgc*.
 
-*IMgc* can be run with:
+*IMgc* can be run with the default parameters:
 
 ```
 IMgc 3.0cMperMb_example.fasta
 ```
 
-[3.0cMperMb_example.fasta.out](examples/3.0cMperMb_example.fasta.out) shows the corresponding output. This is the largest non-recombining block obtainable from [3.0cMperMb_example.fasta](examples/3.0cMperMb_example.fasta), in which individuals and segregating sites are jointly optimized. 
+The output file is shown in [3.0cMperMb_example.fasta.out](examples/3.0cMperMb_example.fasta.out). This contains the largest non-recombining block obtainable from [3.0cMperMb_example.fasta](examples/3.0cMperMb_example.fasta), under the condition that individuals and segregating sites are jointly optimized.
 
 The output format represents a file body for [Jody Hey](https://bio.cst.temple.edu/~hey/)'s [IM](https://bio.cst.temple.edu/~hey/software) class of software, but other output formats, including FASTA, are also possible.
 
